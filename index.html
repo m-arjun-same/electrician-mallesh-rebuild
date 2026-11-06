@@ -20,46 +20,52 @@
   <div class="preloader__pct" id="prePct">0%</div>
 </div>
 
-<div class="frame" aria-hidden="true"><span>Mallesh · Electrician</span><span class="frame__r">Book a job ↓</span></div>
-
-<header class="head">
-  <a class="head__logo" href="#top" data-goto>mallesh<em>.</em></a>
-  <p class="head__tag">Self-employed electrician<br>one pair of hands</p>
-  <button class="head__burger" id="menuBtn" aria-label="Open menu"><span></span><span></span></button>
+<header class="hdr">
+  <a class="hdr__logo" href="#top" data-goto>mallesh<em>.</em></a>
+  <p class="hdr__tag">Self-employed electrician — one pair of hands</p>
+  <div class="hdr__r">
+    <a class="hdr__book" href="#book" data-goto>Book a job</a>
+    <button class="hdr__burger" id="menuBtn" aria-label="Open menu"><span></span><span></span></button>
+  </div>
 </header>
 
-<nav class="menu" id="menu" aria-hidden="true">
-  <div class="menu__grid">
-    <a class="menu__link" href="#work" data-goto><img src="assets/img/ghost/work.webp" alt=""><span>Services</span></a>
-    <a class="menu__link" href="#route" data-goto><img src="assets/img/ghost/approach.webp" alt=""><span>The job route</span></a>
-    <a class="menu__link" href="#about" data-goto><img src="assets/img/ghost/about.webp" alt=""><span>About</span></a>
+<nav class="mmenu" id="menu" aria-hidden="true">
+  <div class="mmenu__grid">
+    <a class="mmenu__link" href="#work" data-goto><img src="assets/img/ghost/work.webp" alt=""><span>Services</span></a>
+    <a class="mmenu__link" href="#route" data-goto><img src="assets/img/ghost/approach.webp" alt=""><span>The job route</span></a>
+    <a class="mmenu__link" href="#about" data-goto><img src="assets/img/ghost/about.webp" alt=""><span>About</span></a>
   </div>
-  <div class="menu__foot">
-    <a href="#book" data-goto class="menu__book">Book a job →</a>
+  <div class="mmenu__foot">
+    <a href="#book" data-goto class="mmenu__book">Book a job →</a>
     <p>Wiring · Lighting · Inverter · Repair · Earthing · Boards · Safety · Rewire</p>
   </div>
 </nav>
 
-<main id="top">
+<div class="sheet" id="top">
+<main>
 
   <!-- DAWN -->
   <section class="dawn">
-    <canvas class="dawn__gl" id="grainCanvas" aria-label="Mallesh"></canvas>
-    <div class="dawn__row">
-      <p class="dawn__lead reveal">I'm <b>Mallesh</b>, a self-employed electrician for homes, shops and offices. Wiring, lighting, fans, boards, backup and repair, all in one pair of hands.</p>
-      <div class="dawn__now reveal">
-        <span class="dawn__now-k">Now</span>
-        <span class="dawn__now-v" id="nowRot">House wiring</span>
+    <div class="dawn-stage"><canvas class="dawn__gl" id="grainCanvas" aria-label="Mallesh"></canvas></div>
+    <div class="dawn-row margins">
+      <p class="dawn__lead mask">I'm <b>Mallesh</b>, a self-employed electrician for homes, shops and offices. Wiring, lighting, fans, boards, backup and repair, all in one pair of hands.</p>
+      <div class="dawn__side">
+        <div class="dawn__now"><span class="dawn__now-k">Now</span><span class="dawn__now-v" id="nowRot">House wiring</span></div>
+        <p class="dawn__side-p">Tripping · sparking · dead points — the real cause, not the symptom.</p>
       </div>
     </div>
-    <h1 class="dawn__h reveal">From a single wire<br>to a full circuit<br>to <em>a home that works.</em></h1>
+    <div class="dawn-foot margins">
+      <h1 class="mask">From a single wire to a full circuit to <em>a home that works.</em></h1>
+      <p class="dawn-foot__r">Scroll<br>↓</p>
+    </div>
   </section>
 
   <!-- WORK -->
   <section class="work" id="work">
-    <div class="work__head reveal">
-      <p class="kick">Selected services · wiring to safety</p>
-      <h2>Eight services, from the first call to <em>the final test.</em></h2>
+    <div class="work-head margins">
+      <p class="kick reveal">Selected services · wiring to safety</p>
+      <div class="wh-names reveal" id="stamps"></div>
+      <h2 class="mask">Eight services, from the first call to <em>the final test.</em></h2>
     </div>
     <div class="marquee" aria-hidden="true"><div class="marquee__in" id="marqueeIn"></div></div>
     <div class="covers" id="covers"></div>
@@ -67,50 +73,71 @@
 
   <!-- IDEA -->
   <section class="idea">
-    <p class="kick reveal">The idea · one person, full job</p>
-    <h2 class="idea__h reveal">First I study the home, check the load and find the real fault. Then the job gets a plan, a price and a <em>tested finish.</em></h2>
-    <div class="nums">
-      <div class="num reveal"><b>1</b><span>person — you deal with me directly</span></div>
-      <div class="num reveal"><b>8</b><span>services, from the first call to the final test</span></div>
-      <div class="num reveal"><b>Call → Done</b><span>booked, quoted, wired, tested, handed over</span></div>
+    <div class="idea-grid margins">
+      <div class="idea-stage reveal">
+        <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#circ">MALLESHELECTRICIAN • ONE PAIR OF HANDS • FIRST CALL TO FINAL TEST • </textPath></text>
+        </svg>
+        <span class="badge__bolt">⚡</span>
+      </div>
+      <div class="idea-copy">
+        <p class="kick reveal">The idea · one person, full job</p>
+        <h2 class="mask">First I study the home, check the load and find the real fault. Then the job gets a plan, a price and a <em>tested finish.</em></h2>
+        <div class="nums">
+          <div class="num reveal"><b data-count="1">0</b><span>person — you deal with me directly</span></div>
+          <div class="num reveal"><b data-count="8">0</b><span>services, first call to final test</span></div>
+          <div class="num reveal"><b>Call → Done</b><span>booked, quoted, wired, tested, handed over</span></div>
+        </div>
+        <ul class="proof reveal">
+          <li>Every point tested live before handover</li>
+          <li>Quote confirmed on site, before work starts</li>
+          <li>Earthing and leakage checked on every job</li>
+          <li>Neat runs, level fittings, labelled boards</li>
+          <li>Clean finish — the work area left tidy</li>
+        </ul>
+      </div>
     </div>
-    <ul class="proof reveal">
-      <li>Every point tested live before handover</li>
-      <li>Quote confirmed on site, before work starts</li>
-      <li>Earthing and leakage checked on every job</li>
-      <li>Neat runs, level fittings, labelled boards</li>
-      <li>Clean finish — the work area left tidy</li>
-    </ul>
   </section>
 
   <!-- SERVICES (paper) -->
   <section class="paper">
-    <p class="kick reveal">What I do · the full list</p>
-    <div class="rows" id="rows"></div>
-    <div class="caps">
-      <div>
-        <h3 class="reveal">Everything else, under one roof</h3>
+    <div class="margins">
+      <div class="sec-head">
+        <p class="kick reveal">What I do · the full list</p>
+        <h2 class="mask">Seven core jobs, <em>done properly.</em></h2>
+      </div>
+      <div class="rows" id="rows"></div>
+      <div class="sec-head sec-head--2">
+        <h2 class="mask">Everything else, <em>under one roof.</em></h2>
         <p class="caps__note reveal">Hover a line for a real example.</p>
       </div>
       <ul class="caps__list" id="capsList"></ul>
     </div>
+    <div class="paper__preview" id="rowPreview"><img alt=""></div>
   </section>
 
   <!-- ABOUT -->
   <section class="about" id="about">
-    <div class="about__grid">
-      <figure class="about__fig reveal"><img src="assets/img/about-mallesh.webp" alt="Electrician at work" width="720" height="900"></figure>
-      <div class="about__txt">
+    <div class="about-grid margins">
+      <figure class="about-stage reveal"><img src="assets/img/about-mallesh.webp" alt="Electrician at work" width="720" height="900"></figure>
+      <div class="about-copy">
         <p class="kick reveal">Self-employed electrician · one pair of hands</p>
-        <p class="about__p reveal">I take electrical jobs from the first call to the final test, working directly for homes, shops and offices — you book me, I do the work. No company, no middleman.</p>
-        <p class="about__p reveal">I connect the problem with the fix: a clear quote, a clear plan, a neat finish and honest testing on every circuit I touch.</p>
-        <p class="about__p reveal">Every job comes with a walkthrough: you see the board, the points and the tests yourself, before I call it done.</p>
+        <p class="about__p mask">I take electrical jobs from the first call to the final test, working directly for homes, shops and offices — you book me, I do the work. No company, no middleman.</p>
+        <p class="about__p mask">I connect the problem with the fix: a clear quote, a clear plan, a neat finish and honest testing on every circuit I touch.</p>
+        <p class="about__p mask">Every job comes with a walkthrough: you see the board, the points and the tests yourself, before I call it done.</p>
       </div>
     </div>
-    <div class="wall" id="wall"></div>
+    <div class="margins">
+      <div class="sec-head sec-head--2">
+        <p class="kick reveal">The toolkit · what I carry</p>
+        <h2 class="mask">Tools for <em>every circuit.</em></h2>
+      </div>
+      <div class="wall" id="wall"></div>
+    </div>
   </section>
 
-  <!-- ROUTE -->
+  <!-- ROUTE (approved — untouched) -->
   <section class="route" id="route">
     <div class="route__head">
       <p class="kick reveal">— The job route · from your call to a tested home —</p>
@@ -128,37 +155,53 @@
 
   <!-- AREAS + STEPS -->
   <section class="snake">
-    <p class="kick reveal">Where I work · and how a job runs</p>
-    <div class="xp">
-      <div class="xp__row reveal"><b>Homes</b><span>Full wiring, boards, backup and repair for houses and flats.</span></div>
-      <div class="xp__row reveal"><b>Shops</b><span>Lighting, boards and points fitted around your hours.</span></div>
-      <div class="xp__row reveal"><b>Offices</b><span>Points, lighting and backup for working spaces.</span></div>
-      <div class="xp__row reveal"><b>Everywhere</b><span>If it carries current, I can wire it, fix it or make it safe.</span></div>
+    <div class="margins">
+      <div class="sec-head">
+        <p class="kick reveal">Where I work</p>
+        <h2 class="mask">Homes, shops, offices — <em>everywhere.</em></h2>
+      </div>
+      <div class="xp" id="xpRow">
+        <div class="xp-b reveal"><b>Homes</b><span>Full wiring, boards, backup and repair for houses and flats.</span></div>
+        <div class="xp-b reveal"><b>Shops</b><span>Lighting, boards and points fitted around your hours.</span></div>
+        <div class="xp-b reveal"><b>Offices</b><span>Points, lighting and backup for working spaces.</span></div>
+        <div class="xp-b reveal"><b>Everywhere</b><span>If it carries current, I can wire it, fix it or make it safe.</span></div>
+      </div>
+      <div class="sec-head sec-head--2">
+        <p class="kick reveal">How a job runs</p>
+        <h2 class="mask">Eight steps, <em>no surprises.</em></h2>
+      </div>
+      <ol class="steps" id="steps"></ol>
     </div>
-    <ol class="steps" id="steps"></ol>
   </section>
 
   <!-- TEST -->
   <section class="test">
-    <p class="kick reveal">Not sure yet?</p>
-    <h2 class="test__h reveal">Give me a <em>small job first.</em></h2>
-    <p class="test__p reveal">One point, one switch, one fault. See the work, the testing and the finish — then decide about the big job.</p>
-    <a class="btn" href="#book" data-goto>Book the small job</a>
+    <div class="test-in margins">
+      <svg class="test-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48"/></svg>
+      <p class="kick reveal">Not sure yet?</p>
+      <h2 class="mask">Give me a <em>small job first.</em></h2>
+      <p class="test__p reveal">One point, one switch, one fault. See the work, the testing and the finish — then decide about the big job.</p>
+      <a class="long-btn" href="#book" data-goto><span>Try a<br>small job</span><i>→</i></a>
+    </div>
   </section>
 
   <!-- FINALE -->
   <section class="finale">
-    <h2 class="finale__h reveal">Bring the problem.<br><em>I'll take it to fixed.</em></h2>
-    <p class="finale__sig reveal">Mallesh</p>
+    <div class="finale-stage"><canvas class="finale__gl" id="finaleCanvas" aria-label="Mallesh"></canvas></div>
+    <div class="finale-copy margins">
+      <h2 class="mask">Bring the problem. <em>I'll take it to fixed.</em></h2>
+      <a class="btn" href="#book" data-goto>Book a job</a>
+    </div>
   </section>
 
 </main>
+</div>
 
-<!-- FOOTER / BOOKING -->
-<footer class="foot" id="book">
-  <div class="foot__in">
+<!-- FOOTER / BOOKING (paper curtain) -->
+<footer class="curtain" id="book">
+  <div class="margins curtain__in">
     <p class="kick">Book a job · no company, no middleman</p>
-    <h2 class="foot__h">Tell me what <em>stopped working.</em></h2>
+    <h2 class="mask">Tell me what <em>stopped working.</em></h2>
     <form class="form" id="bookForm" action="#" method="post">
       <label>Your name<input name="name" type="text" autocomplete="name" placeholder="Name"></label>
       <label>Phone or WhatsApp<input name="contact" type="text" autocomplete="tel" placeholder="Phone or WhatsApp"></label>
@@ -181,6 +224,8 @@
     <p class="foot__col">© 2026 Mallesh — self-employed electrician. Set in Bricolage Grotesque and Instrument Serif (SIL Open Font Licence), wired and built with care in 2026 · Photos: free licences via Wikimedia Commons, credited in humans.txt</p>
   </div>
 </footer>
+
+<div class="frame" aria-hidden="true"><span>Mallesh · Electrician</span><span>Book a job ↓</span></div>
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/grain.js"></script>

@@ -1,8 +1,11 @@
-/* Mallesh — own site logic: build sections from data, preloader, menu, reveals, rotator. */
+/* Mallesh — own site logic v2: smooth scroll, mask reveals, sticky-cover parallax,
+   hover previews, counters — all hand-written. */
 (function () {
   'use strict';
   const $ = (s, el) => (el || document).querySelector(s);
   const $$ = (s, el) => [...(el || document).querySelectorAll(s)];
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TOUCH = matchMedia('(hover: none)').matches;
 
   const SERVICES = [
     ['wiring', 'House wiring', 'Wiring', 'Complete wiring for homes and flats: load, structure and a clear plan for every circuit.'],
@@ -51,34 +54,126 @@
     ['Handover', 'Walkthrough at the board — you see it all working.'],
   ];
 
-  /* covers */
+  /* ---------- build sections ---------- */
+  $('#stamps').innerHTML = SERVICES.map(s => `<span class="stamp">${s[1]}</span>`).join('');
   $('#covers').innerHTML = SERVICES.map((s, i) => `
-    <a class="cover reveal" href="#book" data-goto>
-      <img src="assets/img/work/${s[0]}/still.webp" srcset="assets/img/work/${s[0]}/still-s.webp 1280w, assets/img/work/${s[0]}/still.webp 1920w, assets/img/work/${s[0]}/still-xl.webp 2560w" sizes="(max-width:820px) 100vw, 50vw" alt="${s[1]}" loading="${i < 2 ? 'eager' : 'lazy'}">
-      <span class="cover__n">№ ${i + 1}</span>
-      <span class="cover__meta"><span class="cover__t">${s[1]}</span><span class="cover__k">${s[2]}</span></span>
-    </a>`).join('');
-
-  /* marquee (two identical halves for the loop) */
+    <article class="cover">
+      <div class="cover-media"><img src="assets/img/work/${s[0]}/still.webp" srcset="assets/img/work/${s[0]}/still-s.webp 1280w, assets/img/work/${s[0]}/still.webp 1920w, assets/img/work/${s[0]}/still-xl.webp 2560w" sizes="100vw" alt="${s[1]}" loading="${i < 1 ? 'eager' : 'lazy'}"></div>
+      <div class="cover-top"><span class="no">№ ${i + 1} / 8</span><span class="stamp">${s[2]}</span></div>
+      <div class="cover-bot"><h3>${s[1]}</h3>
+        <div class="cover-row"><p>${s[3]}</p><a href="#book" data-goto>Book this job →</a></div>
+      </div>
+    </article>`).join('');
   const half = PLACES.map(p => `<img src="assets/img/clients/${p}.webp" alt="" loading="lazy">`).join('');
   $('#marqueeIn').innerHTML = half + half;
-
-  /* service rows */
   $('#rows').innerHTML = SERVICES.slice(0, 7).map((s, i) => `
-    <div class="row reveal"><span class="row__n">0${i + 1}</span><span class="row__t">${s[1]}</span><span class="row__d">${s[3]}</span><span class="row__a">→</span></div>`).join('');
-
-  /* caps */
+    <div class="row reveal" data-slug="${s[0]}"><span class="row__n">0${i + 1}</span><span class="row__t">${s[1]}</span><span class="row__d">${s[3]}</span><span class="row__a">→</span></div>`).join('');
   $('#capsList').innerHTML = CAPS.map(c => `<li class="reveal">${c[0]}<span>${c[1]}</span></li>`).join('');
-
-  /* toolkit wall */
   $('#wall').innerHTML = WALL.map(g => `
     <div class="wall__g reveal"><b>${g[0]}</b>${g[1].map(t => `<span class="tag">${t}</span>`).join('')}</div>`).join('');
+  $('#steps').innerHTML = STEPS.map(s => `
+    <li class="step reveal"><h4>${s[0]}</h4><p>${s[1]}</p></li>`).join('');
 
-  /* steps */
-  $('#steps').innerHTML = STEPS.map((s, i) => `
-    <li class="step reveal"><b>Step ${i + 1}</b><h4>${s[0]}</h4><p>${s[1]}</p></li>`).join('');
+  /* ---------- word-mask splitting ---------- */
+  function splitMask(el) {
+    let d = 0;
+    const wrap = (node) => {
+      const w = document.createElement('span'); w.className = 'w';
+      const i = document.createElement('i'); i.style.setProperty('--d', (d++ * 0.028) + 's');
+      i.appendChild(node); w.appendChild(i); return w;
+    };
+    [...el.childNodes].forEach(node => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          frag.appendChild(/^\s+$/.test(part) ? document.createTextNode(' ') : wrap(document.createTextNode(part)));
+        });
+        el.replaceChild(frag, node);
+      } else if (node.nodeType === 1) {
+        el.replaceChild(wrap(node.cloneNode(true)), node);
+      }
+    });
+  }
+  $$('.mask').forEach(splitMask);
 
-  /* now rotator */
+  /* ---------- reveals + counters ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.14 });
+  $$('.reveal, .mask').forEach(el => io.observe(el));
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, end = +el.dataset.count, t0 = performance.now();
+    (function tick(t) {
+      const p = Math.min(1, (t - t0) / 950), ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(end * ease);
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+    cio.unobserve(el);
+  }), { threshold: 0.5 });
+  $$('[data-count]').forEach(el => cio.observe(el));
+
+  /* ---------- own smooth scroll (wheel lerp; native on touch / RM) ---------- */
+  const smooth = !RM && !TOUCH;
+  let target = scrollY, lastY = scrollY, wheelAt = 0;
+  if (smooth) {
+    addEventListener('wheel', e => {
+      if (document.body.classList.contains('menu-open') || e.ctrlKey) return;
+      e.preventDefault();
+      wheelAt = performance.now();
+      target += (e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY);
+      target = Math.max(0, Math.min(target, document.body.scrollHeight - innerHeight));
+    }, { passive: false });
+    (function loop() {
+      const diff = target - scrollY;
+      if (Math.abs(diff) > 0.4) scrollTo(0, scrollY + diff * 0.115);
+      else if (performance.now() - wheelAt > 220 && Math.abs(scrollY - target) > 320) { target = scrollY; }
+      requestAnimationFrame(loop);
+    })();
+  }
+  addEventListener('scroll', () => {
+    if (!smooth) target = scrollY;
+    const y = scrollY, hdr = $('.hdr');
+    if (y > lastY + 5 && y > 340 && !document.body.classList.contains('menu-open')) hdr.classList.add('hide');
+    else if (y < lastY - 4) hdr.classList.remove('hide');
+    lastY = y;
+    /* cover parallax */
+    $$('.cover-media img').forEach(img => {
+      const r = img.closest('.cover').getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      img.style.transform = `translateY(${(-r.top * 0.07).toFixed(1)}px)`;
+    });
+  }, { passive: true });
+
+  /* ---------- anchors via the same engine ---------- */
+  function goto(sel) {
+    const el = sel === '#top' ? document.body : $(sel);
+    if (!el) return;
+    document.body.classList.remove('menu-open');
+    const y = sel === '#top' ? 0 : el.getBoundingClientRect().top + scrollY - 6;
+    if (smooth) { target = y; }
+    else {
+      const start = scrollY, dist = y - start, t0 = performance.now(), dur = Math.min(1300, 450 + Math.abs(dist) * 0.32);
+      (function step(t) {
+        const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 4);
+        scrollTo(0, start + dist * e);
+        if (p < 1) requestAnimationFrame(step);
+      })(t0);
+    }
+  }
+  $$('[data-goto]').forEach(a => a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href && href.startsWith('#')) { e.preventDefault(); goto(href); }
+  }));
+
+  /* ---------- menu ---------- */
+  $('#menuBtn').addEventListener('click', () => {
+    const open = document.body.classList.toggle('menu-open');
+    $('#menu').setAttribute('aria-hidden', String(!open));
+  });
+
+  /* ---------- now rotator ---------- */
   const names = SERVICES.map(s => s[1]);
   let ni = 0;
   const rot = $('#nowRot');
@@ -86,40 +181,23 @@
     rot.style.opacity = 0;
     setTimeout(() => { ni = (ni + 1) % names.length; rot.textContent = names[ni]; rot.style.opacity = 1; }, 260);
   }, 2600);
-  rot.style.transition = 'opacity .26s';
 
-  /* reveals */
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { threshold: 0.12 });
-  $$('.reveal').forEach(el => io.observe(el));
-
-  /* menu */
-  const menuBtn = $('#menuBtn');
-  menuBtn.addEventListener('click', () => {
-    const open = document.body.classList.toggle('menu-open');
-    $('#menu').setAttribute('aria-hidden', String(!open));
-  });
-
-  /* smooth anchors (own easing scroll) */
-  function goto(target) {
-    const el = typeof target === 'string' ? $(target) : target;
-    if (!el) return;
-    document.body.classList.remove('menu-open');
-    const y = el.getBoundingClientRect().top + scrollY - 10;
-    const start = scrollY, dist = y - start, t0 = performance.now(), dur = Math.min(1400, 500 + Math.abs(dist) * 0.35);
-    (function step(t) {
-      const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 4);
-      scrollTo(0, start + dist * e);
-      if (p < 1) requestAnimationFrame(step);
-    })(t0);
-  }
-  $$('[data-goto]').forEach(a => a.addEventListener('click', e => {
-    const href = a.getAttribute('href');
-    if (href && href.startsWith('#')) { e.preventDefault(); goto(href === '#top' ? document.body : href); }
+  /* ---------- paper row hover preview ---------- */
+  const prev = $('#rowPreview'), pimg = prev.querySelector('img');
+  let px = 0, py = 0, tx2 = 0, ty2 = 0;
+  $$('.row').forEach(r => r.addEventListener('mouseenter', () => {
+    pimg.src = `assets/img/services/${r.dataset.slug}.webp`;
+    prev.classList.add('on');
   }));
+  $('.paper').addEventListener('mousemove', e => { tx2 = e.clientX + 26; ty2 = e.clientY - 100; });
+  $('.paper').addEventListener('mouseleave', () => prev.classList.remove('on'));
+  (function follow() {
+    px += (tx2 - px) * 0.16; py += (ty2 - py) * 0.16;
+    prev.style.left = px + 'px'; prev.style.top = py + 'px';
+    requestAnimationFrame(follow);
+  })();
 
-  /* preloader */
+  /* ---------- preloader ---------- */
   const pre = $('#preloader'), bar = $('#preBar'), pct = $('#prePct');
   let lp = 0;
   const iv = setInterval(() => {
@@ -131,7 +209,7 @@
     }
   }, 66);
 
-  /* form */
+  /* ---------- form ---------- */
   $('#bookForm').addEventListener('submit', e => {
     e.preventDefault();
     $('#formOk').hidden = false;
