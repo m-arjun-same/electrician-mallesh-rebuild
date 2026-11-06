@@ -371,3 +371,17 @@ body.menu-open .mmenu{clip-path:inset(0 0 0% 0);visibility:visible}
 @media (max-width:820px){.seal{margin-left:70px;top:30%}}
 
 html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+
+/* ===== per-section colour journey + blend flow (V7) =====
+   navy → teal → oxblood → paper → moss → black → indigo → violet → navy → paper.
+   Each section carries its own flat ground; a 110px blend at its top melts the
+   previous colour into it, so scrolling feels like travelling through rooms. */
+.work{--bg2:#0b352c;--bg3:#11453a;background:linear-gradient(180deg,#0c1424,#06231e) top/100% 110px no-repeat,#06231e}
+.idea{--bg3:#3d1420;background:linear-gradient(180deg,#06231e,#2a0a12) top/100% 110px no-repeat,#2a0a12}
+.paper{background:linear-gradient(180deg,#2a0a12,var(--paper)) top/100% 110px no-repeat,var(--paper)}
+.about{--bg2:#1c3010;--bg3:#274218;background:linear-gradient(180deg,var(--paper),#14230c) top/100% 110px no-repeat,#14230c}
+.route{background:linear-gradient(180deg,#14230c,#04060a) top/100% 110px no-repeat,#04060a}
+.snake{--bg2:#1d1850;--bg3:#2a2270;background:linear-gradient(180deg,#04060a,#141033) top/100% 110px no-repeat,#141033}
+.test{background:radial-gradient(closest-side at 50% 50%,rgba(232,165,88,.16),rgba(232,165,88,0) 100%),linear-gradient(180deg,#141033,#1d1033) top/100% 110px no-repeat,#1d1033}
+.finale{background:linear-gradient(180deg,#1d1033,#0c1424) top/100% 110px no-repeat,#0c1424}
+.curtain{background:linear-gradient(180deg,#0c1424,var(--paper)) top/100% 90px no-repeat,var(--paper)}
