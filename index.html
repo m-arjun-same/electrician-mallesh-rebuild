@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mallesh — Electrician · Self-Employed · Business Portfolio</title>
+<meta name="description" content="Mallesh is a self-employed electrician for homes, shops and offices: wiring, lighting, fans, boards, backup and repair — one pair of hands, first call to final test.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Mallesh — Electrician","description":"Self-employed electrician: wiring, lighting, inverter & UPS, fault repair, earthing and safety.","priceRange":"₹₹"}
+</script>
+</head>
+<body>
+
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__name">MALLESH</div>
+  <div class="preloader__bar"><span id="preBar"></span></div>
+  <div class="preloader__pct" id="prePct">0%</div>
+</div>
+
+<div class="frame" aria-hidden="true"><span>Mallesh · Electrician</span><span class="frame__r">Book a job ↓</span></div>
+
+<header class="head">
+  <a class="head__logo" href="#top" data-goto>mallesh<em>.</em></a>
+  <p class="head__tag">Self-employed electrician<br>one pair of hands</p>
+  <button class="head__burger" id="menuBtn" aria-label="Open menu"><span></span><span></span></button>
+</header>
+
+<nav class="menu" id="menu" aria-hidden="true">
+  <div class="menu__grid">
+    <a class="menu__link" href="#work" data-goto><img src="assets/img/ghost/work.webp" alt=""><span>Services</span></a>
+    <a class="menu__link" href="#route" data-goto><img src="assets/img/ghost/approach.webp" alt=""><span>The job route</span></a>
+    <a class="menu__link" href="#about" data-goto><img src="assets/img/ghost/about.webp" alt=""><span>About</span></a>
+  </div>
+  <div class="menu__foot">
+    <a href="#book" data-goto class="menu__book">Book a job →</a>
+    <p>Wiring · Lighting · Inverter · Repair · Earthing · Boards · Safety · Rewire</p>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- DAWN -->
+  <section class="dawn">
+    <canvas class="dawn__gl" id="grainCanvas" aria-label="Mallesh"></canvas>
+    <div class="dawn__row">
+      <p class="dawn__lead reveal">I'm <b>Mallesh</b>, a self-employed electrician for homes, shops and offices. Wiring, lighting, fans, boards, backup and repair, all in one pair of hands.</p>
+      <div class="dawn__now reveal">
+        <span class="dawn__now-k">Now</span>
+        <span class="dawn__now-v" id="nowRot">House wiring</span>
+      </div>
+    </div>
+    <h1 class="dawn__h reveal">From a single wire<br>to a full circuit<br>to <em>a home that works.</em></h1>
+  </section>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <div class="work__head reveal">
+      <p class="kick">Selected services · wiring to safety</p>
+      <h2>Eight services, from the first call to <em>the final test.</em></h2>
+    </div>
+    <div class="marquee" aria-hidden="true"><div class="marquee__in" id="marqueeIn"></div></div>
+    <div class="covers" id="covers"></div>
+  </section>
+
+  <!-- IDEA -->
+  <section class="idea">
+    <p class="kick reveal">The idea · one person, full job</p>
+    <h2 class="idea__h reveal">First I study the home, check the load and find the real fault. Then the job gets a plan, a price and a <em>tested finish.</em></h2>
+    <div class="nums">
+      <div class="num reveal"><b>1</b><span>person — you deal with me directly</span></div>
+      <div class="num reveal"><b>8</b><span>services, from the first call to the final test</span></div>
+      <div class="num reveal"><b>Call → Done</b><span>booked, quoted, wired, tested, handed over</span></div>
+    </div>
+    <ul class="proof reveal">
+      <li>Every point tested live before handover</li>
+      <li>Quote confirmed on site, before work starts</li>
+      <li>Earthing and leakage checked on every job</li>
+      <li>Neat runs, level fittings, labelled boards</li>
+      <li>Clean finish — the work area left tidy</li>
+    </ul>
+  </section>
+
+  <!-- SERVICES (paper) -->
+  <section class="paper">
+    <p class="kick reveal">What I do · the full list</p>
+    <div class="rows" id="rows"></div>
+    <div class="caps">
+      <div>
+        <h3 class="reveal">Everything else, under one roof</h3>
+        <p class="caps__note reveal">Hover a line for a real example.</p>
+      </div>
+      <ul class="caps__list" id="capsList"></ul>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about__grid">
+      <figure class="about__fig reveal"><img src="assets/img/about-mallesh.webp" alt="Electrician at work" width="720" height="900"></figure>
+      <div class="about__txt">
+        <p class="kick reveal">Self-employed electrician · one pair of hands</p>
+        <p class="about__p reveal">I take electrical jobs from the first call to the final test, working directly for homes, shops and offices — you book me, I do the work. No company, no middleman.</p>
+        <p class="about__p reveal">I connect the problem with the fix: a clear quote, a clear plan, a neat finish and honest testing on every circuit I touch.</p>
+        <p class="about__p reveal">Every job comes with a walkthrough: you see the board, the points and the tests yourself, before I call it done.</p>
+      </div>
+    </div>
+    <div class="wall" id="wall"></div>
+  </section>
+
+  <!-- ROUTE -->
+  <section class="route" id="route">
+    <div class="route__head">
+      <p class="kick reveal">— The job route · from your call to a tested home —</p>
+      <h2 class="route__h reveal">Call, visit, work: <em>one route</em></h2>
+      <p class="route__sub reveal">Keep scrolling and follow a job as it travels it, step by step.</p>
+    </div>
+    <div class="route__stage" id="routeStage">
+      <div class="route__sticky">
+        <canvas class="route__gl" id="routeCanvas"></canvas>
+        <div class="route__plate" id="routePlate"><span id="plateKick"></span><b id="plateTitle"></b><i id="plateLine"></i></div>
+        <div class="route__list" id="routeList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREAS + STEPS -->
+  <section class="snake">
+    <p class="kick reveal">Where I work · and how a job runs</p>
+    <div class="xp">
+      <div class="xp__row reveal"><b>Homes</b><span>Full wiring, boards, backup and repair for houses and flats.</span></div>
+      <div class="xp__row reveal"><b>Shops</b><span>Lighting, boards and points fitted around your hours.</span></div>
+      <div class="xp__row reveal"><b>Offices</b><span>Points, lighting and backup for working spaces.</span></div>
+      <div class="xp__row reveal"><b>Everywhere</b><span>If it carries current, I can wire it, fix it or make it safe.</span></div>
+    </div>
+    <ol class="steps" id="steps"></ol>
+  </section>
+
+  <!-- TEST -->
+  <section class="test">
+    <p class="kick reveal">Not sure yet?</p>
+    <h2 class="test__h reveal">Give me a <em>small job first.</em></h2>
+    <p class="test__p reveal">One point, one switch, one fault. See the work, the testing and the finish — then decide about the big job.</p>
+    <a class="btn" href="#book" data-goto>Book the small job</a>
+  </section>
+
+  <!-- FINALE -->
+  <section class="finale">
+    <h2 class="finale__h reveal">Bring the problem.<br><em>I'll take it to fixed.</em></h2>
+    <p class="finale__sig reveal">Mallesh</p>
+  </section>
+
+</main>
+
+<!-- FOOTER / BOOKING -->
+<footer class="foot" id="book">
+  <div class="foot__in">
+    <p class="kick">Book a job · no company, no middleman</p>
+    <h2 class="foot__h">Tell me what <em>stopped working.</em></h2>
+    <form class="form" id="bookForm" action="#" method="post">
+      <label>Your name<input name="name" type="text" autocomplete="name" placeholder="Name"></label>
+      <label>Phone or WhatsApp<input name="contact" type="text" autocomplete="tel" placeholder="Phone or WhatsApp"></label>
+      <label class="form__wide">The job<textarea name="job" rows="3" placeholder="What is the problem, and where?"></textarea></label>
+      <fieldset class="form__chips">
+        <legend>Job size</legend>
+        <label><input type="radio" name="size" value="Small fix"><span>Small fix</span></label>
+        <label><input type="radio" name="size" value="One room"><span>One room</span></label>
+        <label><input type="radio" name="size" value="Full home"><span>Full home</span></label>
+        <label><input type="radio" name="size" value="Not sure"><span>Not sure</span></label>
+      </fieldset>
+      <button class="btn form__send" type="submit">Send request</button>
+      <p class="form__ok" id="formOk" hidden>Got it — I will call you back. For anything urgent, call again and mention this request.</p>
+    </form>
+    <div class="foot__cards">
+      <div><b>Call or WhatsApp</b><span>Fastest way to reach me — I answer myself.</span></div>
+      <div><b>Same-visit fix*</b><span>*Most small jobs finished in one visit.</span></div>
+      <div><b>Tested &amp; safe</b><span>Every point tested live before handover.</span></div>
+    </div>
+    <p class="foot__col">© 2026 Mallesh — self-employed electrician. Set in Bricolage Grotesque and Instrument Serif (SIL Open Font Licence), wired and built with care in 2026 · Photos: free licences via Wikimedia Commons, credited in humans.txt</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/grain.js"></script>
+<script src="assets/js/route.js"></script>
+</body>
+</html>

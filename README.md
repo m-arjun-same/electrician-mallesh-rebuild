@@ -8,3 +8,6 @@ UI match — no reference code is used here.
 
 The live mirrored version stays at m-arjun-same/electrician-mallesh until
 this rebuild matches it, then this repo takes over.
+
+Structure: index.html + assets/css/site.css + assets/js (main, grain, route).
+Photos: free licences via Wikimedia Commons — credits in humans.txt.
