@@ -79,9 +79,5 @@
       const fs = Math.min(H * 1.5, W / 4.1);
       return { font: `800 ${fs}px 'Bricolage Grotesque', sans-serif`, lift: fs * 0.04 };
     });
-    makeGrain(document.getElementById('finaleCanvas'), 'Mallesh', (W, H) => {
-      const fs = Math.min(H * 1.7, W / 3.4);
-      return { font: `italic 400 ${fs}px 'Instrument Serif', serif`, lift: fs * 0.02 };
-    });
   });
 })();

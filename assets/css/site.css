@@ -312,3 +312,31 @@ body.menu-open .mmenu{clip-path:inset(0 0 0% 0);visibility:visible}
   .mask .w i{transform:none;transition:none}
   .marquee__in,.badge,.test-ring{animation:none}
 }
+
+/* finale ink stage — signature line, pen touch, hint, seal */
+.finale-stage{cursor:crosshair}
+.ink-line{position:absolute;left:16%;right:16%;top:68%;height:1px;background:linear-gradient(90deg,rgba(244,240,232,0),rgba(244,240,232,.28) 15%,rgba(244,240,232,.28) 85%,rgba(244,240,232,0));pointer-events:none;transition:opacity 1.2s var(--ease)}
+.ink-line::before{content:'×';position:absolute;left:4%;bottom:6px;font-size:22px;color:var(--mute)}
+.finale-stage.is-sealed .ink-line{opacity:0}
+.ink-touch{position:absolute;left:0;top:0;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;pointer-events:none;opacity:0;transition:opacity .4s;border:1.5px solid rgba(226,164,88,.5);background:radial-gradient(closest-side,rgba(226,164,88,.10),transparent)}
+.ink-touch::after{content:'';position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px;border-radius:50%;background:var(--uv)}
+.ink-hint{position:absolute;left:50%;top:calc(68% + 22px);transform:translateX(-50%);display:flex;align-items:center;gap:12px;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--mute);opacity:0;transition:opacity 1.2s;pointer-events:none;white-space:nowrap}
+.ink-hint.is-on{opacity:1}
+.finale-stage.is-sealed .ink-hint{opacity:0!important}
+.ink-hint .hold{position:relative;width:14px;height:14px;border-radius:50%;background:var(--uv);flex:none}
+.ink-hint .hold::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1.5px solid var(--uv);animation:holdpulse 1.8s ease-out infinite}
+@keyframes holdpulse{from{transform:scale(.5);opacity:1}to{transform:scale(1.5);opacity:0}}
+.ink-done{position:absolute;right:16%;top:calc(68% + 26px);font:600 15px/1 var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);background:none;border:0;border-bottom:1px solid rgba(244,240,232,.3);padding:6px 0;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .8s,color .3s}
+.ink-done.is-on{opacity:1;pointer-events:auto}
+.ink-done:hover{color:var(--ink)}
+.finale-stage.is-sealed .ink-done{opacity:0;pointer-events:none}
+.seal{position:absolute;left:50%;top:36%;width:clamp(110px,11vw,150px);aspect-ratio:1;margin-left:clamp(120px,15vw,230px);border:2.5px solid var(--stamp);border-radius:50%;color:var(--stamp);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transform:rotate(-14deg) scale(2.4);opacity:0;pointer-events:none;background:rgba(200,80,63,.05)}
+.seal__b{font-size:26px;line-height:1}
+.seal__t{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1}
+.seal__s{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.seal.stamp-in{animation:stampin .55s cubic-bezier(.3,1.4,.5,1) forwards}
+@keyframes stampin{from{transform:rotate(-30deg) scale(2.4);opacity:0}to{transform:rotate(-14deg) scale(1);opacity:1}}
+.ink-again{position:absolute;left:50%;top:calc(68% + 30px);transform:translateX(-50%);font-family:var(--serif);font-style:italic;font-size:20px;color:var(--mute);background:none;border:0;border-bottom:1px solid rgba(244,240,232,.3);padding:6px 2px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .8s,color .3s}
+.ink-again:hover{color:var(--ink)}
+.finale-stage.is-sealed .ink-again{opacity:1;pointer-events:auto}
+@media (max-width:820px){.seal{margin-left:70px;top:30%}}

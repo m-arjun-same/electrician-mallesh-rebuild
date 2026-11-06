@@ -203,9 +203,17 @@
     </div>
   </section>
 
-  <!-- FINALE -->
+  <!-- FINALE — the signature: grains sign "Mallesh" as you hold -->
   <section class="finale">
-    <div class="finale-stage"><canvas class="finale__gl" id="finaleCanvas" aria-label="Mallesh"></canvas></div>
+    <div class="finale-stage" id="inkStage">
+      <canvas class="finale__gl" id="finaleCanvas" aria-label="Mallesh — signature"></canvas>
+      <div class="ink-line" aria-hidden="true"></div>
+      <div class="ink-touch" id="inkTouch" aria-hidden="true"></div>
+      <p class="ink-hint" id="inkHint"><span class="hold"></span> Hold on the line to sign</p>
+      <button class="ink-done" id="inkDone" type="button">Done</button>
+      <div class="seal" id="seal" aria-hidden="true"><span class="seal__b">⚡</span><span class="seal__t">Mallesh</span><span class="seal__s">Tested &amp; safe</span></div>
+      <button class="ink-again" id="inkAgain" type="button">Sign again</button>
+    </div>
     <div class="finale-copy margins">
       <h2 class="mask">Bring the problem. <em>I'll take it to fixed.</em></h2>
       <a class="btn" href="#book" data-goto>Book a job</a>
@@ -248,5 +256,6 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/grain.js"></script>
 <script src="assets/js/route.js"></script>
+<script src="assets/js/finale.js"></script>
 </body>
 </html>
