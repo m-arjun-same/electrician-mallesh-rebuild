@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const INK = '244,240,232', COPPER = '226,164,88', EMBER = '240,178,126';
+  const INK = '238,242,248', COPPER = '232,165,88', EMBER = '240,178,126';
 
   function makeGrain(cv, text, fontFn) {
     if (!cv) return;
@@ -77,7 +77,7 @@
   document.fonts.ready.then(() => {
     makeGrain(document.getElementById('grainCanvas'), 'MALLESH', (W, H) => {
       const fs = Math.min(H * 1.5, W / 4.1);
-      return { font: `800 ${fs}px 'Bricolage Grotesque', sans-serif`, lift: fs * 0.04 };
+      return { font: `800 ${fs}px 'Archivo', sans-serif`, lift: fs * 0.04 };
     });
   });
 })();

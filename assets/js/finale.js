@@ -12,7 +12,7 @@
   const seal = document.getElementById('seal');
   const touch = document.getElementById('inkTouch');
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const INK = '244,240,232', COPPER = '226,164,88', EMBER = '240,178,126';
+  const INK = '238,242,248', COPPER = '232,165,88', EMBER = '240,178,126';
 
   let grains = [], W = 0, H = 0, progress = 0, holding = false, sealed = false;
   let demo = 0, demoDone = false, pen = { x: -100, y: -100, on: false };
@@ -28,7 +28,7 @@
     off.width = W; off.height = H;
     const o = off.getContext('2d');
     const fs = Math.min(H * 1.55, W / 3.3);
-    o.font = `italic 400 ${fs}px 'Instrument Serif', serif`;
+    o.font = `italic 400 ${fs}px 'Newsreader', serif`;
     o.textAlign = 'center'; o.textBaseline = 'middle';
     o.fillStyle = '#fff';
     o.fillText('Mallesh', W / 2, H * 0.44);

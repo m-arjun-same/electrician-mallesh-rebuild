@@ -119,8 +119,15 @@
   }), { threshold: 0.5 });
   $$('[data-count]').forEach(el => cio.observe(el));
 
-  /* ---------- own smooth scroll (wheel lerp; native on touch / RM) ---------- */
-  const smooth = !RM && !TOUCH;
+  /* ---------- smooth scroll: Lenis (MIT) first; own wheel-lerp as fallback ---------- */
+  let lenis = null;
+  if (!RM && !TOUCH && window.Lenis) {
+    lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
+    const rafL = t => { lenis.raf(t); requestAnimationFrame(rafL); };
+    requestAnimationFrame(rafL);
+  }
+  window.__lenis = lenis;
+  const smooth = !RM && !TOUCH && !lenis;
   let target = scrollY, lastY = scrollY, wheelAt = 0;
   if (smooth) {
     addEventListener('wheel', e => {
@@ -153,6 +160,7 @@
 
   /* ---------- anchors via the same engine ---------- */
   function goto(sel) {
+    if (lenis) { lenis.scrollTo(el); return; }
     const el = sel === '#top' ? document.body : $(sel);
     if (!el) return;
     document.body.classList.remove('menu-open');
