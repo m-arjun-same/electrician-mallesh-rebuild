@@ -237,10 +237,38 @@
     }
   }, 66);
 
-  /* ---------- form ---------- */
-  $('#bookForm').addEventListener('submit', e => {
+  /* ---------- job sheet form ---------- */
+  const form = $('#bookForm');
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    $('#formOk').hidden = false;
-    e.target.querySelector('.form__send').textContent = 'Request noted ✓';
+    const fd = new FormData(form);
+    const name = (fd.get('name') || '').trim();
+    const contact = (fd.get('contact') || '').trim();
+    const job = (fd.get('job') || '').trim();
+    const size = fd.get('size') || 'Small fix';
+    const err = $('#formErr');
+    if (!name || !contact || !job) {
+      const missing = [!name && 'your name', !contact && 'a number to call back', !job && 'what the job is'].filter(Boolean);
+      err.textContent = 'Missing: ' + missing.join(', ') + '.';
+      err.hidden = false;
+      return;
+    }
+    err.hidden = true;
+    $('#doneText').textContent = `Thanks, ${name.split(' ')[0]} — I will call you back on ${contact}.`;
+    $('#doneSum').innerHTML =
+      `<dt>Job</dt><dd>${job.replace(/</g, '&lt;')}</dd>` +
+      `<dt>Size</dt><dd>${size}</dd>` +
+      `<dt>Callback</dt><dd>${contact.replace(/</g, '&lt;')}</dd>`;
+    form.hidden = true;
+    const done = $('#sheetDone');
+    done.hidden = false;
+    requestAnimationFrame(() => done.querySelector('.stamp-big').classList.add('on'));
+    done.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+  $('#againBtn').addEventListener('click', () => {
+    $('#sheetDone').hidden = true;
+    $('#sheetDone').querySelector('.stamp-big').classList.remove('on');
+    form.reset();
+    form.hidden = false;
   });
 })();

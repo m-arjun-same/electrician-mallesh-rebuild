@@ -223,31 +223,57 @@
 </main>
 </div>
 
-<!-- FOOTER / BOOKING (paper curtain) -->
+<!-- FOOTER / BOOKING — the job sheet (total redesign: taste + impeccable) -->
 <footer class="curtain" id="book">
   <div class="margins curtain__in">
-    <p class="kick">Book a job · no company, no middleman</p>
-    <h2 class="mask">Tell me what <em>stopped working.</em></h2>
-    <form class="form" id="bookForm" action="#" method="post">
-      <label>Your name<input name="name" type="text" autocomplete="name" placeholder="Name"></label>
-      <label>Phone or WhatsApp<input name="contact" type="text" autocomplete="tel" placeholder="Phone or WhatsApp"></label>
-      <label class="form__wide">The job<textarea name="job" rows="3" placeholder="What is the problem, and where?"></textarea></label>
-      <fieldset class="form__chips">
-        <legend>Job size</legend>
-        <label><input type="radio" name="size" value="Small fix"><span>Small fix</span></label>
-        <label><input type="radio" name="size" value="One room"><span>One room</span></label>
-        <label><input type="radio" name="size" value="Full home"><span>Full home</span></label>
-        <label><input type="radio" name="size" value="Not sure"><span>Not sure</span></label>
-      </fieldset>
-      <button class="btn form__send" type="submit">Send request</button>
-      <p class="form__ok" id="formOk" hidden>Got it — I will call you back. For anything urgent, call again and mention this request.</p>
-    </form>
-    <div class="foot__cards">
-      <div><b>Call or WhatsApp</b><span>Fastest way to reach me — I answer myself.</span></div>
-      <div><b>Same-visit fix*</b><span>*Most small jobs finished in one visit.</span></div>
-      <div><b>Tested &amp; safe</b><span>Every point tested live before handover.</span></div>
+    <div class="sheet-head" aria-hidden="true">
+      <span>Job sheet</span><span class="sheet-head__no">№ 001 — Mallesh, electrician</span><span>One pair of hands</span>
     </div>
-    <p class="foot__col">© 2026 Mallesh — self-employed electrician. Set in Bricolage Grotesque and Instrument Serif (SIL Open Font Licence), wired and built with care in 2026 · Photos: free licences via Wikimedia Commons, credited in humans.txt</p>
+    <div class="book-grid">
+      <div class="book-left">
+        <h2 class="mask">Tell me what <em>stopped working.</em></h2>
+        <p class="book-lede reveal">Fill the sheet and I will call you back myself. No company, no middleman, no call centre — the person who answers is the person who does the work.</p>
+        <div class="assure">
+          <div class="assure__row reveal"><b>Call or WhatsApp</b><span>Fastest way to reach me — I answer myself.</span></div>
+          <div class="assure__row reveal"><b>Same-visit fix*</b><span>*Most small jobs finished in one visit.</span></div>
+          <div class="assure__row reveal"><b>Tested &amp; safe</b><span>Every point tested live before handover.</span></div>
+        </div>
+      </div>
+      <div class="book-right">
+        <form class="jform" id="bookForm" action="#" method="post" novalidate>
+          <label class="jfield"><span>Your name</span>
+            <input name="name" type="text" autocomplete="name" placeholder="Full name" required>
+          </label>
+          <label class="jfield"><span>Phone or WhatsApp</span>
+            <input name="contact" type="tel" autocomplete="tel" placeholder="Number I should call back" required>
+          </label>
+          <label class="jfield"><span>The job</span>
+            <textarea name="job" rows="4" placeholder="What stopped working, and where is it?" required></textarea>
+          </label>
+          <fieldset class="jchips">
+            <legend>Job size</legend>
+            <label><input type="radio" name="size" value="Small fix" checked><span>Small fix</span></label>
+            <label><input type="radio" name="size" value="One room"><span>One room</span></label>
+            <label><input type="radio" name="size" value="Full home"><span>Full home</span></label>
+            <label><input type="radio" name="size" value="Not sure"><span>Not sure</span></label>
+          </fieldset>
+          <p class="jform__err" id="formErr" hidden>Three things missing: your name, a number to call back, and what the job is.</p>
+          <button class="jform__send" type="submit">Send the job sheet <i>→</i></button>
+          <p class="jform__note">Sending puts you in my job book. Nothing is shared with anyone else.</p>
+        </form>
+        <div class="sheet-done" id="sheetDone" hidden>
+          <div class="stamp-big" aria-hidden="true">Job<br>logged</div>
+          <h3>Sheet received.</h3>
+          <p id="doneText">I will call you back shortly.</p>
+          <dl class="done-sum" id="doneSum"></dl>
+          <button class="jform__send jform__send--ghost" id="againBtn" type="button">Book another job</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-foot">
+      <span class="book-mark">mallesh<em>.</em></span>
+      <p class="foot__col">© 2026 Mallesh — self-employed electrician. Set in Bricolage Grotesque and Instrument Serif (SIL Open Font Licence), wired and built with care in 2026 · Photos: free licences via Wikimedia Commons, credited in humans.txt</p>
+    </div>
   </div>
 </footer>
 
