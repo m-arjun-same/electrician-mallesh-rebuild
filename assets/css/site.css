@@ -384,4 +384,8 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
 .snake{--bg2:#1d1850;--bg3:#2a2270;background:linear-gradient(180deg,#04060a,#141033) top/100% 110px no-repeat,#141033}
 .test{background:radial-gradient(closest-side at 50% 50%,rgba(232,165,88,.16),rgba(232,165,88,0) 100%),linear-gradient(180deg,#141033,#1d1033) top/100% 110px no-repeat,#1d1033}
 .finale{background:linear-gradient(180deg,#1d1033,#0c1424) top/100% 110px no-repeat,#0c1424}
-.curtain{background:linear-gradient(180deg,#0c1424,var(--paper)) top/100% 90px no-repeat,var(--paper)}
+/* V8: the job sheet is the AMBER COPY — classic triplicate job-book paper, its own
+   room in the journey (services keep the white sheet). All dark-on-light form
+   styling carries over; only the sheet's own tokens change. */
+.curtain{--paper:#eeb85c;--uv2:#8a4d12;--pmute:#66481c;--pline:rgba(38,24,4,.28);background:linear-gradient(180deg,#0c1424,#eeb85c) top/100% 64px no-repeat,#eeb85c}
+.curtain .jfield input::placeholder,.curtain .jfield textarea::placeholder{color:#7a5a20}
