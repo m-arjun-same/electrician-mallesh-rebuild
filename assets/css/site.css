@@ -72,7 +72,9 @@ body.menu-open .mmenu{clip-path:inset(0 0 0% 0);visibility:visible}
 .mmenu__book{font-size:clamp(22px,3.4vw,40px);font-weight:800;color:var(--uv);text-decoration:none}
 
 /* dawn */
-.dawn{overflow-x:clip;min-height:100svh;display:flex;flex-direction:column;padding-top:calc(var(--hdr) + 2vh)}
+.dawn{position:relative;overflow-x:clip;min-height:100svh;display:flex;flex-direction:column;padding-top:calc(var(--hdr) + 2vh);background:linear-gradient(160deg,#031C26 30%,#1B6CA8 78%,#5AD2F4 130%)}
+.dawn__shader{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.dawn>*:not(.dawn__shader){position:relative;z-index:1}
 .dawn-stage{position:relative;margin:0 var(--m);height:min(40vh,calc((100vw - 2 * var(--m)) / 4.25));min-height:90px;flex:none}
 .dawn__gl{width:100%;height:100%}
 .dawn-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:start;margin-top:auto;padding-top:5vh}
@@ -376,7 +378,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
    navy → teal → oxblood → paper → moss → black → indigo → violet → navy → paper.
    Each section carries its own flat ground; a 110px blend at its top melts the
    previous colour into it, so scrolling feels like travelling through rooms. */
-.work{--bg2:#0b352c;--bg3:#11453a;background:linear-gradient(180deg,#0c1424,#06231e) top/100% 110px no-repeat,#06231e}
+.work{--bg2:#0b352c;--bg3:#11453a;background:linear-gradient(180deg,#031C26,#06231e) top/100% 110px no-repeat,#06231e}
 .idea{--bg3:#3d1420;background:linear-gradient(180deg,#06231e,#2a0a12) top/100% 110px no-repeat,#2a0a12}
 .paper{background:linear-gradient(180deg,#2a0a12,var(--paper)) top/100% 110px no-repeat,var(--paper)}
 .about{--bg2:#1c3010;--bg3:#274218;background:linear-gradient(180deg,var(--paper),#14230c) top/100% 110px no-repeat,#14230c}
