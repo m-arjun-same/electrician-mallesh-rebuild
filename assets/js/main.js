@@ -100,8 +100,13 @@
   /* ---------- reveals + counters ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { threshold: 0.14 });
+  }), { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
   $$('.reveal, .mask').forEach(el => io.observe(el));
+  /* safety net: nothing already on screen may stay hidden */
+  setTimeout(() => $$('.reveal:not(.in), .mask:not(.in)').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight * 1.05 && r.bottom > -80) el.classList.add('in');
+  }), 1400);
   const cio = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     const el = e.target, end = +el.dataset.count, t0 = performance.now();
@@ -196,6 +201,29 @@
     prev.style.left = px + 'px'; prev.style.top = py + 'px';
     requestAnimationFrame(follow);
   })();
+
+  /* ---------- snake: side-scrolling plane (own engine) ---------- */
+  const snakeSec = $('#snake'), plane = $('#snakePlane'), cam = $('#snakeCam'), map = $('#snakeMap');
+  if (snakeSec && plane && !RM && !matchMedia('(max-width: 820px)').matches) {
+    const path = map.querySelector('path'), dot = $('#snakeDot');
+    const pathLen = path.getTotalLength();
+    let travel = 0;
+    function measure() {
+      travel = Math.max(0, plane.scrollWidth - innerWidth);
+      snakeSec.style.height = (travel + innerHeight) + 'px';
+    }
+    measure();
+    addEventListener('resize', measure);
+    addEventListener('scroll', () => {
+      const r = snakeSec.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / (travel || 1)));
+      plane.style.transform = `translateX(${(-travel * p).toFixed(1)}px)`;
+      cam.style.transform = `scale(${(0.965 + 0.035 * Math.sin(p * Math.PI)).toFixed(4)}) rotate(${(-1 + 2 * p).toFixed(3)}deg)`;
+      const pt = path.getPointAtLength(p * pathLen);
+      dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y);
+      map.classList.toggle('is-on', r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.5);
+    }, { passive: true });
+  }
 
   /* ---------- preloader ---------- */
   const pre = $('#preloader'), bar = $('#preBar'), pct = $('#prePct');

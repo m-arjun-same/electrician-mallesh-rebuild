@@ -153,35 +153,53 @@
     </div>
   </section>
 
-  <!-- AREAS + STEPS -->
-  <section class="snake">
-    <div class="margins">
-      <div class="sec-head">
-        <p class="kick reveal">Where I work</p>
-        <h2 class="mask">Homes, shops, offices — <em>everywhere.</em></h2>
+  <!-- AREAS + STEPS (snake: side-scrolling) -->
+  <section class="snake" id="snake">
+    <div class="snake-view">
+      <div class="snake-cam" id="snakeCam">
+        <div class="snake-plane" id="snakePlane">
+          <div class="snake-row snake-a">
+            <div class="snake-head">
+              <p class="kick">Where I work</p>
+              <h2 class="mask">Homes, shops, offices — <em>everywhere.</em></h2>
+              <p class="xp-route">Four kinds of places, one standard of work: neat, tested, safe.</p>
+            </div>
+            <div class="xp">
+              <div class="xp-b"><b>Homes</b><span>Full wiring, boards, backup and repair for houses and flats.</span></div>
+              <div class="xp-b"><b>Shops</b><span>Lighting, boards and points fitted around your hours.</span></div>
+              <div class="xp-b"><b>Offices</b><span>Points, lighting and backup for working spaces.</span></div>
+              <div class="xp-b"><b>Everywhere</b><span>If it carries current, I can wire it, fix it or make it safe.</span></div>
+            </div>
+          </div>
+          <div class="snake-gap" aria-hidden="true"></div>
+          <div class="snake-row snake-b">
+            <div class="snake-head">
+              <p class="kick">How a job runs</p>
+              <h2 class="mask">Eight steps, <em>no surprises.</em></h2>
+              <p class="xp-route">The same route on every job, small or full-home.</p>
+            </div>
+            <ol class="steps" id="steps"></ol>
+          </div>
+        </div>
       </div>
-      <div class="xp" id="xpRow">
-        <div class="xp-b reveal"><b>Homes</b><span>Full wiring, boards, backup and repair for houses and flats.</span></div>
-        <div class="xp-b reveal"><b>Shops</b><span>Lighting, boards and points fitted around your hours.</span></div>
-        <div class="xp-b reveal"><b>Offices</b><span>Points, lighting and backup for working spaces.</span></div>
-        <div class="xp-b reveal"><b>Everywhere</b><span>If it carries current, I can wire it, fix it or make it safe.</span></div>
-      </div>
-      <div class="sec-head sec-head--2">
-        <p class="kick reveal">How a job runs</p>
-        <h2 class="mask">Eight steps, <em>no surprises.</em></h2>
-      </div>
-      <ol class="steps" id="steps"></ol>
     </div>
+    <svg class="snake-map" id="snakeMap" viewBox="0 0 40 30" aria-hidden="true"><path d="M3 22 C 12 6, 20 26, 27 12 S 36 8, 38 14"/><circle id="snakeDot" cx="3" cy="22" r="2.6"/></svg>
   </section>
 
   <!-- TEST -->
   <section class="test">
     <div class="test-in margins">
-      <svg class="test-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48"/></svg>
+      <svg class="test-ring" viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="brush" cx="50" cy="50" r="47.5"/>
+        <circle class="brush brush2" cx="50.8" cy="49.4" r="47"/>
+      </svg>
       <p class="kick reveal">Not sure yet?</p>
-      <h2 class="mask">Give me a <em>small job first.</em></h2>
-      <p class="test__p reveal">One point, one switch, one fault. See the work, the testing and the finish — then decide about the big job.</p>
-      <a class="long-btn" href="#book" data-goto><span>Try a<br>small job</span><i>→</i></a>
+      <h2 class="test-h mask">Give me a <em>small job first.</em></h2>
+      <p class="sec-p reveal">One point, one switch, one fault. See the work, the testing and the finish — then decide about the big job.</p>
+      <div class="presses reveal">
+        <a class="press" href="#book" data-goto>Book the small job</a>
+        <a class="press press--ghost" href="#work" data-goto>See the services</a>
+      </div>
     </div>
   </section>
 
